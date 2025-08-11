@@ -9,112 +9,50 @@
       font-family: 'Segoe UI', sans-serif;
       background: linear-gradient(to right, #f0f4f8, #d9e2ec);
       color: #333;
-      text-align: center;
-      padding: 2rem;
-    }
-
-    h1 {
-      color: #2a7f62;
-      margin-bottom: 1rem;
-    }
-
-    .button {
-      background-color: #2a7f62;
-      color: white;
-      padding: 0.75rem 1.5rem;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      font-size: 1rem;
-      margin-top: 1rem;
-    }
-
-    .button:hover {
-      background-color: #246b54;
-    }
-
-    #nextStep {
-      display: none;
-      margin-top: 2rem;
-    }
-
-    #walletStatus {
-      margin-top: 1rem;
-      font-size: 1rem;
-      color: #555;
-    }
-  </style>
-</head>
-<body>
-
-  <h1>🌟 Welcome to the New Paradigm Friendship Community</h1>
-  <p>We’re building a space for authentic connection, collaboration, and growth.</p>
-
-  <button class="button" id="connectButton">🔗 Connect Wallet</button>
-  <p id="walletStatus">Please connect your wallet to begin.</p>
-
-  <div id="nextStep">
-    <h2>🌱 You're In!</h2>
-    <p>Thank you for connecting. Next, please affirm our shared values to continue your onboarding journey.</p>
-    <!-- You can add checkboxes, forms, or links here -->
-  </div>
-
-  <script>
-    const connectButton = document.getElementById('connectButton');
-    const walletStatus = document.getElementById('walletStatus');
-    const nextStep = document.getElementById('nextStep');
-
-    connectButton.addEventListener('click', async () => {
-      if (typeof window.ethereum !== 'undefined') {
-        try {
-          const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
-          walletStatus.innerText = `✅ Connected: ${accounts[0]}`;
-          localStorage.setItem('userWallet', accounts[0]);
-          nextStep.style.display = 'block';
-        } catch (error) {
-          walletStatus.innerText = '❌ Connection failed.';
-          console.error(error);
-        }
-      } else {
-        walletStatus.innerText = '⚠️ MetaMask not detected. Please install it.';
-      }
-    });
-  </script>
-
-</body>
-</html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Onboarding Journey</title>
-  <style>
-    body {
-      font-family: 'Segoe UI', sans-serif;
       margin: 0;
       padding: 0;
-      background: #f4f4f4;
     }
+
     section {
       display: none;
       padding: 40px;
       text-align: center;
     }
+
     section.active {
       display: block;
     }
+
     button {
-      padding: 10px 20px;
-      margin-top: 20px;
-      font-size: 16px;
+      background: linear-gradient(135deg, #ff9900, #ff5e62);
+      border: none;
+      color: white;
+      padding: 15px 30px;
+      font-size: 18px;
+      border-radius: 8px;
       cursor: pointer;
+      margin-top: 20px;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
+
+    button:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 15px rgba(255, 94, 98, 0.6);
+    }
+
     input, textarea {
       display: block;
       margin: 10px auto;
       padding: 10px;
       width: 80%;
       max-width: 400px;
+      font-size: 16px;
+    }
+
+    #walletAddress {
+      margin-top: 20px;
+      font-size: 16px;
+      color: #555;
     }
   </style>
 </head>
@@ -122,7 +60,7 @@
 
   <!-- 1. Welcome Screen -->
   <section id="welcome" class="active">
-    <h1>Welcome to the Collective 🌟</h1>
+    <h1>🌟 Welcome to the New Paradigm Friendship Community</h1>
     <p>Begin your journey to becoming a valued member.</p>
     <button onclick="goTo('mission')">Begin Journey</button>
   </section>
@@ -134,59 +72,12 @@
     <button onclick="goTo('wallet')">Next: Connect Wallet</button>
   </section>
 
-  <!-- 3. Wallet Connection Prompt -->
-  <style>
-  body {
-    font-family: 'Segoe UI', sans-serif;
-    background: #0f0f0f;
-    color: #fff;
-    text-align: center;
-    padding-top: 100px;
-  }
-
-  #connectButton {
-    background: linear-gradient(135deg, #ff9900, #ff5e62);
-    border: none;
-    color: white;
-    padding: 15px 30px;
-    font-size: 18px;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-  }
-
-  #connectButton:hover {
-    transform: scale(1.05);
-    box-shadow: 0 0 15px rgba(255, 94, 98, 0.6);
-  }
-
-  #walletAddress {
-    margin-top: 20px;
-    font-size: 16px;
-    color: #ccc;
-  }
-</style>
-
-<button id="connectButton">🔗 Connect Wallet</button>
-<p id="walletAddress"></p>
-
-<script>
-  const connectButton = document.getElementById('connectButton');
-  const walletAddress = document.getElementById('walletAddress');
-
-  connectButton.addEventListener('click', async () => {
-    if (typeof window.ethereum !== 'undefined') {
-      try {
-        const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
-        walletAddress.innerText = `✅ Connected: ${accounts[0]}`;
-      } catch (error) {
-        walletAddress.innerText = '❌ Connection failed.';
-        console.error(error);
-      }
-    } else {
-      walletAddress.innerText = 'localStorage.setItem('userWallet', accounts[0]);
-  });
-</script>
+  <!-- 3. Wallet Connection -->
+  <section id="wallet">
+    <h2>🔗 Connect Your Wallet</h2>
+    <button id="connectButton">Connect Wallet</button>
+    <p id="walletAddress">Please connect your wallet to continue.</p>
+  </section>
 
   <!-- 4. Member Info Form -->
   <section id="form">
@@ -210,13 +101,25 @@
       document.getElementById(id).classList.add('active');
     }
 
-    function connectWallet() {
-      alert("Wallet connection logic goes here (e.g., MetaMask or WalletConnect).");
-    }
+    const connectButton = document.getElementById('connectButton');
+    const walletAddress = document.getElementById('walletAddress');
+
+    connectButton.addEventListener('click', async () => {
+      if (typeof window.ethereum !== 'undefined') {
+        try {
+          const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+          walletAddress.innerText = `✅ Connected: ${accounts[0]}`;
+          localStorage.setItem('userWallet', accounts[0]);
+          goTo('form');
+        } catch (error) {
+          walletAddress.innerText = '❌ Connection failed.';
+          console.error(error);
+        }
+      } else {
+        walletAddress.innerText = '⚠️ MetaMask not detected. Please install it.';
+      }
+    });
   </script>
 
 </body>
 </html>
-
-
-
