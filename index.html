@@ -3,6 +3,90 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>New Paradigm Friendship Community</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to right, #f0f4f8, #d9e2ec);
+      color: #333;
+      text-align: center;
+      padding: 2rem;
+    }
+
+    h1 {
+      color: #2a7f62;
+      margin-bottom: 1rem;
+    }
+
+    .button {
+      background-color: #2a7f62;
+      color: white;
+      padding: 0.75rem 1.5rem;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 1rem;
+      margin-top: 1rem;
+    }
+
+    .button:hover {
+      background-color: #246b54;
+    }
+
+    #nextStep {
+      display: none;
+      margin-top: 2rem;
+    }
+
+    #walletStatus {
+      margin-top: 1rem;
+      font-size: 1rem;
+      color: #555;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>🌟 Welcome to the New Paradigm Friendship Community</h1>
+  <p>We’re building a space for authentic connection, collaboration, and growth.</p>
+
+  <button class="button" id="connectButton">🔗 Connect Wallet</button>
+  <p id="walletStatus">Please connect your wallet to begin.</p>
+
+  <div id="nextStep">
+    <h2>🌱 You're In!</h2>
+    <p>Thank you for connecting. Next, please affirm our shared values to continue your onboarding journey.</p>
+    <!-- You can add checkboxes, forms, or links here -->
+  </div>
+
+  <script>
+    const connectButton = document.getElementById('connectButton');
+    const walletStatus = document.getElementById('walletStatus');
+    const nextStep = document.getElementById('nextStep');
+
+    connectButton.addEventListener('click', async () => {
+      if (typeof window.ethereum !== 'undefined') {
+        try {
+          const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+          walletStatus.innerText = `✅ Connected: ${accounts[0]}`;
+          localStorage.setItem('userWallet', accounts[0]);
+          nextStep.style.display = 'block';
+        } catch (error) {
+          walletStatus.innerText = '❌ Connection failed.';
+          console.error(error);
+        }
+      } else {
+        walletStatus.innerText = '⚠️ MetaMask not detected. Please install it.';
+      }
+    });
+  </script>
+
+</body>
+</html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Onboarding Journey</title>
   <style>
     body {
@@ -133,5 +217,6 @@
 
 </body>
 </html>
+
 
 
