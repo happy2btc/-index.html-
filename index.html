@@ -51,12 +51,59 @@
   </section>
 
   <!-- 3. Wallet Connection Prompt -->
-  <section id="wallet">
-    <h2>Connect Your Wallet</h2>
-    <p>To verify your identity and access member benefits.</p>
-    <button onclick="connectWallet()">Connect Wallet</button>
-    <button onclick="goTo('form')">Skip for Now</button>
-  </section>
+  <style>
+  body {
+    font-family: 'Segoe UI', sans-serif;
+    background: #0f0f0f;
+    color: #fff;
+    text-align: center;
+    padding-top: 100px;
+  }
+
+  #connectButton {
+    background: linear-gradient(135deg, #ff9900, #ff5e62);
+    border: none;
+    color: white;
+    padding: 15px 30px;
+    font-size: 18px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  #connectButton:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 15px rgba(255, 94, 98, 0.6);
+  }
+
+  #walletAddress {
+    margin-top: 20px;
+    font-size: 16px;
+    color: #ccc;
+  }
+</style>
+
+<button id="connectButton">🔗 Connect Wallet</button>
+<p id="walletAddress"></p>
+
+<script>
+  const connectButton = document.getElementById('connectButton');
+  const walletAddress = document.getElementById('walletAddress');
+
+  connectButton.addEventListener('click', async () => {
+    if (typeof window.ethereum !== 'undefined') {
+      try {
+        const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+        walletAddress.innerText = `✅ Connected: ${accounts[0]}`;
+      } catch (error) {
+        walletAddress.innerText = '❌ Connection failed.';
+        console.error(error);
+      }
+    } else {
+      walletAddress.innerText = '⚠️ MetaMask not detected. Please install it.';
+    }
+  });
+</script>
 
   <!-- 4. Member Info Form -->
   <section id="form">
@@ -87,3 +134,4 @@
 
 </body>
 </html>
+
