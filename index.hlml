@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Onboarding Journey</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f4f4f4;
+    }
+    section {
+      display: none;
+      padding: 40px;
+      text-align: center;
+    }
+    section.active {
+      display: block;
+    }
+    button {
+      padding: 10px 20px;
+      margin-top: 20px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    input, textarea {
+      display: block;
+      margin: 10px auto;
+      padding: 10px;
+      width: 80%;
+      max-width: 400px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 1. Welcome Screen -->
+  <section id="welcome" class="active">
+    <h1>Welcome to the Collective 🌟</h1>
+    <p>Begin your journey to becoming a valued member.</p>
+    <button onclick="goTo('mission')">Begin Journey</button>
+  </section>
+
+  <!-- 2. Mission & Values -->
+  <section id="mission">
+    <h2>Our Mission & Values</h2>
+    <p>🌱 Growth • 🤝 Collaboration • 🔍 Transparency • 🎨 Creativity</p>
+    <button onclick="goTo('wallet')">Next: Connect Wallet</button>
+  </section>
+
+  <!-- 3. Wallet Connection Prompt -->
+  <section id="wallet">
+    <h2>Connect Your Wallet</h2>
+    <p>To verify your identity and access member benefits.</p>
+    <button onclick="connectWallet()">Connect Wallet</button>
+    <button onclick="goTo('form')">Skip for Now</button>
+  </section>
+
+  <!-- 4. Member Info Form -->
+  <section id="form">
+    <h2>Tell Us About You</h2>
+    <input type="text" placeholder="Your Name" />
+    <textarea placeholder="Why do you want to join?" rows="4"></textarea>
+    <label><input type="checkbox" /> I align with the community values</label>
+    <button onclick="goTo('confirm')">Submit</button>
+  </section>
+
+  <!-- 5. Confirmation Screen -->
+  <section id="confirm">
+    <h2>You're In! 🎉</h2>
+    <p>Welcome aboard. Your journey begins now.</p>
+    <button onclick="goTo('welcome')">Start Over</button>
+  </section>
+
+  <script>
+    function goTo(id) {
+      document.querySelectorAll('section').forEach(sec => sec.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+    }
+
+    function connectWallet() {
+      alert("Wallet connection logic goes here (e.g., MetaMask or WalletConnect).");
+    }
+  </script>
+
+</body>
+</html>
