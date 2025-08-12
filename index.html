@@ -96,30 +96,29 @@
   </section>
 
   <script>
-    function goTo(id) {
-      document.querySelectorAll('section').forEach(sec => sec.classList.remove('active'));
-      document.getElementById(id).classList.add('active');
-    }
+    <script>
+  const connectButton = document.getElementById('connectButton');
+  const walletAddress = document.getElementById('walletAddress');
 
-    const connectButton = document.getElementById('connectButton');
-    const walletAddress = document.getElementById('walletAddress');
-
-    connectButton.addEventListener('click', async () => {
-      if (typeof window.ethereum !== 'undefined') {
-        try {
-          const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
-          walletAddress.innerText = `✅ Connected: ${accounts[0]}`;
-          localStorage.setItem('userWallet', accounts[0]);
-          goTo('form');
-        } catch (error) {
-          walletAddress.innerText = '❌ Connection failed.';
-          console.error(error);
-        }
-      } else {
-        walletAddress.innerText = '⚠️ MetaMask not detected. Please install it.';
+  connectButton.addEventListener('click', async () => {
+    console.log("Connect button clicked");
+    if (typeof window.ethereum !== 'undefined') {
+      console.log("MetaMask detected");
+      try {
+        const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+        console.log("Accounts:", accounts);
+        walletAddress.innerText = `✅ Connected: ${accounts[0]}`;
+      } catch (error) {
+        console.error("Connection error:", error);
+        walletAddress.innerText = '❌ Connection failed.';
       }
-    });
-  </script>
+    } else {
+      console.warn("MetaMask not detected");
+      walletAddress.innerText = '⚠️ MetaMask not detected. Please install it.';
+    }
+  });
+</script>
 
 </body>
 </html>
+
